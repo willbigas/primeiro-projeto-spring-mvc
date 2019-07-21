@@ -44,7 +44,7 @@
             <h1 class="center-align">Cadastro de Pessoas</h1>
             <a class="waves-effect waves-light btn" href="/"><i class="material-icons left">list</i>Voltar</a>
             <p></p>
-            <form class="s8" action="/salvarpessoa" method="post" th:object="${pessoa}">
+            <form class="s8" action="/salvarpessoa" method="post" id="formulario" th:object="${pessoa}">
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
@@ -66,14 +66,24 @@
                         <input id="idade" type="tel" name="idade" class="validate" th:field="*{idade}">
                         <label for="idade">Idade</label>
                     </div>
-                    <div class="input-field col s12 right-align">
+                    <div class="input-field col s10 right-align">
+                        <button class="btn waves-effect waves-light" type="button"
+                                onclick="document.getElementById('formulario').reset();">Limpar<i
+                                class="material-icons right">clear</i></button>
+                    </div>
+                    <div class="input-field col s2 center-align">
                         <button class="btn waves-effect waves-light" type="submit"
                                 onclick="M.toast({html: 'Pessoa Cadastrada com sucesso!'})">Salvar<i
                                 class="material-icons right">send</i></button>
                     </div>
+
                 </div>
             </form>
             <br>
+            <br>
+            <br>
+            <br>
+
             <br>
             <hr/>
 
@@ -109,7 +119,7 @@
                 <tbody>
                 <tr th:each="pessoa: ${pessoas}">
                     <td><span th:text="${pessoa.id}"></span></td>
-                    <td><span th:text="${pessoa.nome}"></span></td>
+                    <td><a th:href="@{/listartelefones/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text="${pessoa.nome}"></span></a></td>
                     <td><span th:text="${pessoa.sobrenome}"></span></td>
                     <td><span th:text="${pessoa.idade}"></span></td>
                     <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"><i

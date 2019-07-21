@@ -22,7 +22,6 @@ public class PessoaController {
     public ModelAndView listarPessoas() {
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastroPessoa");
 
-
         modelAndView.addObject("pessoas", pessoaRepository.findAll());
         modelAndView.addObject("pessoa", new Pessoa());
         return modelAndView;
@@ -63,6 +62,14 @@ public class PessoaController {
         modelAndView.addObject("pessoas",
                 pessoaRepository.findPessoasByNomeContainingIgnoreCaseOrSobrenomeContainingIgnoreCase(campoPesquisa , campoPesquisa));
         modelAndView.addObject("pessoa", new Pessoa());
+        return modelAndView;
+    }
+
+    @GetMapping(path = "/listartelefones/{idpessoa}")
+    public ModelAndView buscarTelefonesDaPessoa(@PathVariable("idpessoa") Integer idPessoa) {
+
+        ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+        modelAndView.addObject("pessoa", pessoaRepository.findById(idPessoa).get());
         return modelAndView;
     }
 

@@ -1,10 +1,8 @@
 package br.com.willbigas.primeiroprojetospringmvc.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -17,7 +15,8 @@ public class Pessoa implements Serializable {
     private String nome;
     private String sobrenome;
     private int idade;
-
+    @OneToMany(mappedBy = "pessoa")
+    private List<Telefone> telefones;
 
     public Integer getId() {
         return id;
@@ -49,5 +48,13 @@ public class Pessoa implements Serializable {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
     }
 }
