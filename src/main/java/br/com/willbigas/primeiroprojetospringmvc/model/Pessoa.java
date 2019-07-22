@@ -1,6 +1,8 @@
 package br.com.willbigas.primeiroprojetospringmvc.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,8 +14,11 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank
     private String nome;
+    @NotBlank
     private String sobrenome;
+    @NotNull
     private int idade;
     @OneToMany(mappedBy = "pessoa")
     private List<Telefone> telefones;

@@ -44,6 +44,12 @@
             <h1 class="center-align">Cadastro de Pessoas</h1>
             <a class="waves-effect waves-light btn" href="/"><i class="material-icons left">list</i>Voltar</a>
             <p></p>
+            <br>
+            <br>
+            <div th:each="erro : ${erros}">
+                <span th:text="${erro}"></span>
+            </div>
+
             <form class="s8" action="/salvarpessoa" method="post" id="formulario" th:object="${pessoa}">
                 <div class="row">
                     <div class="input-field col s6">

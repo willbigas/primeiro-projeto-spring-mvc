@@ -44,55 +44,88 @@
             <h1 class="center-align">Cadastro de Telefones</h1>
             <a class="waves-effect waves-light btn" href="/cadastropessoa"><i class="material-icons left">list</i>Voltar</a>
             <p></p>
+            <br>
+            <br>
+            <div th:each="erro : ${erros}">
+                <span th:text="${erro}"></span>
+            </div>
             <hr/>
             <h4>Pessoa</h4>
-                <tbody>
-                <div th:each="pessoa: ${pessoa}">
-                    <p>Codigo: <span th:text="${pessoa.id}"></span></p>
-                    <p>Nome: <span th:text="${pessoa.nome}"></span></a></p>
-                    <p>Sobrenome:<span th:text="${pessoa.sobrenome}"></span></p>
-                    <p>Idade:<span th:text="${pessoa.idade}"></span></p>
-                </div>
-
-                <h4>Telefones da Pessoa</h4>
-            <tbody>
-            <div th:each="telefone: ${pessoa.telefones}">
-                <p>Codigo: <span th:text="${telefone.id}"></span></p>
-                <p>Numero: <span th:text="${telefone.numero}"></span></a></p>
+            <div th:each="pessoa: ${pessoa}">
+                <p>Codigo: <span th:text="${pessoa.id}"></span></p>
+                <p>Nome: <span th:text="${pessoa.nome}"></span></a></p>
+                <p>Sobrenome:<span th:text="${pessoa.sobrenome}"></span></p>
+                <p>Idade:<span th:text="${pessoa.idade}"></span></p>
             </div>
-
         </div>
-
-
+        <h2 class="center-align">Telefones da pessoa</h2>
+        <table class="striped highlight centered responsive-table">
+            <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Numero</th>
+                <th>Tipo</th>
+                <th>Codigo Pessoa</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="telefone: ${pessoa.telefones}">
+                <td><span th:text="${telefone.id}"></span></td>
+                <td><span th:text="${telefone.numero}"></span></a></td>
+                <td><span th:text="${telefone.tipo}"></span></td>
+                <td><span th:text="${telefone.pessoa.id}"></span></td>
+                <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${telefone.id})}"><i class="material-icons">delete</i></a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Rodape da pagina</h5>
-                    <p class="grey-text text-lighten-4">Rodape da pagina aki nesta parte da pagina
-                        content.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
+    <div class="row">
+        <h4>Telefones da Pessoa</h4>
+        <form th:action="@{/adicionartelefonepessoa/{idpessoa}(idpessoa=${pessoa.id})}" method="post" id="formulario">
+            <div class="input-field col s6">
+                <input id="numero" type="text" name="numero" class="validate">
+                <label for="numero">Numero</label>
             </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <div class="input-field col s6">
+                <input id="tipo" type="text" name="tipo" class="validate">
+                <label for="tipo">Tipo</label>
             </div>
-        </div>
-    </footer>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Adicionar
+                <i class="material-icons right">add</i>
+            </button>
+        </form>
+    </div>
 </div>
+
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Rodape da pagina</h5>
+                <p class="grey-text text-lighten-4">Rodape da pagina aki nesta parte da pagina
+                    content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
 
 
 <script type="text/javascript" src="/materialize/js/materialize.js"></script>
